@@ -39,7 +39,11 @@
 {% endfor  %}
       rules:
       - type: allow
+{% if ipv6 is defined %}
+        remote-ip-prefix:  ::/128
+{% else %}
         remote-ip-prefix:  0.0.0.0/0
+{% endif %}
         port-range-min: 22
         port-range-max: 22
         protocol: tcp
@@ -55,7 +59,11 @@
       rules:
       # open ICMP echo request (ping)
       - type: allow
+{% if ipv6 is defined %}
+        remote-ip-prefix:  ::/128
+{% else %}
         remote-ip-prefix:  0.0.0.0/0
+{% endif %}
         # icmp type
         port-range-min: 8
         # icmp code
@@ -70,7 +78,11 @@
 {% endfor  %}
       rules:
       - type: allow
+{% if ipv6 is defined %}
+        remote-ip-prefix:  ::/128
+{% else %}
         remote-ip-prefix:  0.0.0.0/0
+{% endif %}
         port-range-min: 11382
         port-range-max: 11382
         protocol: tcp
@@ -84,7 +96,11 @@
 {% endfor  %}
       rules:
       - type: allow
+{% if ipv6 is defined %}
+        remote-ip-prefix:  ::/128
+{% else %}
         remote-ip-prefix:  0.0.0.0/0
+{% endif %}
         port-range-min: 9091
         port-range-max: 9091
         protocol: tcp
