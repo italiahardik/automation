@@ -38,33 +38,52 @@
 {% for network_group in scenario.network_groups %}
 {%   if 'NEUTRON-VLAN' in network_group.component_endpoints %}
 {%     set ns.physnet_id = ns.physnet_id+1 %}
+
           - name: NEUTRON-{{ network_group.name|upper }}-VLAN-NET
             provider:
               - network_type: vlan
                 physical_network: physnet{{ ns.physnet_id }}
                 segmentation_id: {{ ns.vlan_id }}
-            cidr: 172.{{ ns.net_id }}.1.0/24
-            no_gateway:  True
-            enable_dhcp: True
-            allocation_pools:
-              - start: 172.{{ ns.net_id }}.1.10
-                end: 172.{{ ns.net_id }}.1.250
-            host_routes:
-              # route to management network
-              - destination: 192.168.{{ ns.mgmt_net_id }}.0/24
-                nexthop:  172.{{ ns.net_id }}.1.1
-
+                no_gateway:  True
+                enable_dhcp: True
+{% if ipv6 is defined %}
+                cidr: fc00:0:0:{{ ns.net_id }}::/122
+                allocation_pools:
+                  - start: fc00:0:0:{{ ns.net_id }}::10
+                    end: fc00:0:0:{{ ns.net_id }}::250
+                host_routes:
+                  # route to management network
+                  - destination: fc00:0:0:{{ ns.mgmt_net_id }}::/122
+                    nexthop:  fc00:0:0:{{ ns.net_id }}::1
 {%     set ns.net_id = ns.net_id+1 %}
 {%     set ns.vlan_id = ns.vlan_id+1 %}
+{% else %}
+                cidr: 172.{{ ns.net_id }}.1.0/24
+                allocation_pools:
+                  - start: 172.{{ ns.net_id }}.1.10
+                    end: 172.{{ ns.net_id }}.1.250
+                host_routes:
+                  # route to management network
+                  - destination: 192.168.{{ ns.mgmt_net_id }}.0/24
+                    nexthop:  172.{{ ns.net_id }}.1.1
+{%     set ns.net_id = ns.net_id+1 %}
+{%     set ns.vlan_id = ns.vlan_id+1 %}
+{%   endif %}
 {%   endif %}
 {% endfor %}
         neutron_external_networks:
 {% for network_group in scenario.network_groups %}
 {%   if 'NEUTRON-EXT' in network_group.component_endpoints %}
           - name: NEUTRON-{{ network_group.name|upper }}-EXT-NET
+{% if ipv6 is defined %}
+            cidr: fc00:0:0:{{ ns.net_id }}:://122
+            gateway-ip: fc00:0:0:{{ ns.net_id }}::1
+{%     set ns.net_id = ns.net_id+1 %}
+{% else %}
             cidr: 172.{{ ns.net_id }}.0.0/16
             gateway: 172.{{ ns.net_id }}.0.1
 {%     set ns.net_id = ns.net_id+1 %}
+{%   endif %}
 {%   endif %}
 {% endfor %}
 {% endif %}
