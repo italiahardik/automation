@@ -549,8 +549,9 @@ def generate_heat_model(input_model, virt_config):
             input_model['cloud']['name'])
     )
 
-    clm_cidr = IPNetwork(input_model['baremetal']['subnet'],
-                         input_model['baremetal']['netmask'])
+    #clm_cidr = IPNetwork(input_model['baremetal']['subnet'],
+    #                     input_model['baremetal']['netmask'])
+    clm_cidr = IPNetwork('fc00:0:0:101::/122')
     clm_network = None
     heat_networks = heat_template['networks'] = dict()
 
@@ -728,7 +729,6 @@ def generate_heat_model(input_model, virt_config):
                                                  'neutron-networks',
                                                  dict()).itervalues() if
                                              network['name'] in heat_networks])
-
                     if clm_network['name'] in network_group['networks']:
                         # if the CLM port is a bond port, then only the
                         # primary is considered if configured

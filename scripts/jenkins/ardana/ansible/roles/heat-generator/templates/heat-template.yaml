@@ -76,7 +76,13 @@ resources:
           end: "{{ pool[1] }}"
 {%     endfor %}
 {%   endif %}
+{%   if ipv6 is defined %}
+      ip_verison: 6
+      ipv6_address_mode: slaac
+      ipv6_ra_mode: slaac
+{%    else %}
       ip_version: 4
+{%    endif %}
 {%   if network.gateway is defined %}
       gateway_ip: "{{ network.gateway }}"
 {%   endif %}
