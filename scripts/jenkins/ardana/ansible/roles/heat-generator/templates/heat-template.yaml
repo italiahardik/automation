@@ -54,8 +54,9 @@ resources:
       ipv6_ra_mode: slaac
 {%    else %}
       ip_version: 4
-{%    endif %}
       enable_dhcp: False
+{%    endif %}
+
 
   # networks and subnets
 {% set global_ns = namespace(mgmt_network_name='', mgmt_ports=[]) %}
@@ -92,11 +93,12 @@ resources:
       ipv6_ra_mode: slaac
 {%    else %}
       ip_version: 4
+      enable_dhcp: {{ network.is_mgmt }}
 {%    endif %}
 {%   if network.gateway is defined %}
       gateway_ip: "{{ network.gateway }}"
 {%   endif %}
-      enable_dhcp: {{ network.is_mgmt }}
+
 
 {%   if network.external %}
   router_ext_{{ name }}_interface:
