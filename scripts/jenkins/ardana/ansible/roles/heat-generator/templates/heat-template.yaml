@@ -77,7 +77,7 @@ resources:
 {%     endfor %}
 {%   endif %}
 {%   if ipv6 is defined %}
-      ip_verison: 6
+      ip_version: 6
       ipv6_address_mode: slaac
       ipv6_ra_mode: slaac
 {%    else %}
