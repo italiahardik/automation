@@ -72,3 +72,5 @@ virt_config:
   flavors: '{{ flavors|default([]) }}'
   images: '{{ images|default([]) }}'
   disks: '{{ disks|default([]) }}'
+
+ipv6: True
