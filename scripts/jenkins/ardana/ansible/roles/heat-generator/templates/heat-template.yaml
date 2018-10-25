@@ -21,7 +21,11 @@ parameters:
     type: string
     label: Default CIDR
     description: Default CIDR value to use for networks which don't have CIDR specified
+{%   if ipv6 is defined %}
+    default: "2001::/122"
+{%    else %}
     default: "1.1.1.0/24"
+{%    endif %}
 
 resources:
 
@@ -44,7 +48,13 @@ resources:
     properties:
       network_id: { get_resource: default_network }
       cidr: { get_param: default_subnet_cidr }
+{%   if ipv6 is defined %}
+      ip_version: 6
+      ipv6_address_mode: slaac
+      ipv6_ra_mode: slaac
+{%    else %}
       ip_version: 4
+{%    endif %}
       enable_dhcp: False
 
   # networks and subnets
