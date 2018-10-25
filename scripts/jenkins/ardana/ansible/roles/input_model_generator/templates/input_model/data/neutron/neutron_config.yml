@@ -76,7 +76,7 @@
 {%   if 'NEUTRON-EXT' in network_group.component_endpoints %}
           - name: NEUTRON-{{ network_group.name|upper }}-EXT-NET
 {% if ipv6 is defined %}
-            cidr: fc00:0:0:{{ ns.net_id }}:://122
+            cidr: fc00:0:0:{{ ns.net_id }}::/122
             gateway-ip: fc00:0:0:{{ ns.net_id }}::1
 {%     set ns.net_id = ns.net_id+1 %}
 {% else %}
