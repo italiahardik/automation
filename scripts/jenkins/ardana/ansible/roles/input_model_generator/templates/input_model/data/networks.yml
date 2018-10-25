@@ -30,7 +30,7 @@
 {%   endif %}
       tagged-vlan: {{ network_group['tagged_vlan']|default('False')|lower }}
 {%   if ipv6 is defined %}
-      cidr: fc00:0:0:{{ ns.net_id }}::/122
+      cidr: fc00:0:0:{{ ns.net_id }}::/64
       gateway-ip: fc00:0:0:{{ ns.net_id }}::1
 {%   else  %}
       cidr: 192.168.{{ ns.net_id }}.0/24
