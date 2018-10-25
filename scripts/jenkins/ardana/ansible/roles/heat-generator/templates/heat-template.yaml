@@ -22,7 +22,7 @@ parameters:
     label: Default CIDR
     description: Default CIDR value to use for networks which don't have CIDR specified
 {%   if ipv6 is defined %}
-    default: "2001::/122"
+    default: "2001::/64"
 {%    else %}
     default: "1.1.1.0/24"
 {%    endif %}
