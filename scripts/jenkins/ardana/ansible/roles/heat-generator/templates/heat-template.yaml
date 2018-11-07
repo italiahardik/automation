@@ -50,13 +50,10 @@ resources:
       cidr: { get_param: default_subnet_cidr }
 {%   if ipv6 is defined %}
       ip_version: 6
-      ipv6_address_mode: slaac
-      ipv6_ra_mode: slaac
 {%    else %}
       ip_version: 4
-      enable_dhcp: False
 {%    endif %}
-
+      enable_dhcp: False
 
   # networks and subnets
 {% set global_ns = namespace(mgmt_network_name='', mgmt_ports=[]) %}
@@ -89,12 +86,10 @@ resources:
 {%   endif %}
 {%   if ipv6 is defined %}
       ip_version: 6
-      ipv6_address_mode: slaac
-      ipv6_ra_mode: slaac
-{%    else %}
+{%    else  %}
       ip_version: 4
-      enable_dhcp: {{ network.is_mgmt }}
 {%    endif %}
+      enable_dhcp: {{ network.is_mgmt }}
 {%   if network.gateway is defined %}
       gateway_ip: "{{ network.gateway }}"
 {%   endif %}
