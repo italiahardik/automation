@@ -77,7 +77,7 @@
         port-range-max: 0
         protocol: icmp
 
-  - name: PING
+    - name: PING
       network-groups:
 {% for network_group in scenario['network_groups']
   if 'MANAGEMENT' in network_group['component_endpoints'] or
@@ -129,7 +129,7 @@
         port-range-max: 9091
         protocol: tcp
 
-  - name: FRONTAIL
+    - name: FRONTAIL
       network-groups:
 {% for network_group in scenario['network_groups']
   if 'EXTERNAL-API' in network_group['component_endpoints'] %}
