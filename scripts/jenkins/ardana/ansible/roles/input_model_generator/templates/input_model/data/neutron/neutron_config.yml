@@ -44,28 +44,28 @@
               - network_type: vlan
                 physical_network: physnet{{ ns.physnet_id }}
                 segmentation_id: {{ ns.vlan_id }}
-                no_gateway:  True
-                enable_dhcp: True
+            no_gateway:  True
+            enable_dhcp: True
 {% if ipv6 is defined %}
-                cidr: fc00:0:0:{{ ns.net_id }}::/64
-                allocation_pools:
-                  - start: fc00:0:0:{{ ns.net_id }}::10
-                    end: fc00:0:0:{{ ns.net_id }}::250
-                host_routes:
-                  # route to management network
-                  - destination: fc00:0:0:{{ ns.mgmt_net_id }}::/64
-                    nexthop:  fc00:0:0:{{ ns.net_id }}::1
+            cidr: fc00:0:0:{{ ns.net_id }}::/64
+            allocation_pools:
+              - start: fc00:0:0:{{ ns.net_id }}::10
+                end: fc00:0:0:{{ ns.net_id }}::250
+            host_routes:
+              # route to management network
+              - destination: fc00:0:0:{{ ns.mgmt_net_id }}::/64
+                nexthop:  fc00:0:0:{{ ns.net_id }}::1
 {%     set ns.net_id = ns.net_id+1 %}
 {%     set ns.vlan_id = ns.vlan_id+1 %}
 {% else %}
-                cidr: 172.{{ ns.net_id }}.1.0/24
-                allocation_pools:
-                  - start: 172.{{ ns.net_id }}.1.10
-                    end: 172.{{ ns.net_id }}.1.250
-                host_routes:
-                  # route to management network
-                  - destination: 192.168.{{ ns.mgmt_net_id }}.0/24
-                    nexthop:  172.{{ ns.net_id }}.1.1
+            cidr: 172.{{ ns.net_id }}.1.0/24
+            allocation_pools:
+              - start: 172.{{ ns.net_id }}.1.10
+                end: 172.{{ ns.net_id }}.1.250
+            host_routes:
+            # route to management network
+              - destination: 192.168.{{ ns.mgmt_net_id }}.0/24
+                nexthop:  172.{{ ns.net_id }}.1.1
 {%     set ns.net_id = ns.net_id+1 %}
 {%     set ns.vlan_id = ns.vlan_id+1 %}
 {%   endif %}
