@@ -110,8 +110,7 @@
         remote-ip-prefix:  ::/128
 {% else    %}
         remote-ip-prefix:  0.0.0.0/0
-{% endif   %}
-        remote-ip-prefix:  0.0.0.0/0
+{% endif %}
         port-range-min: 11382
         port-range-max: 11382
         protocol: tcp
@@ -141,7 +140,7 @@
         remote-ip-prefix:  ::/128
 {% else    %}
         remote-ip-prefix:  0.0.0.0/0
-{% endif   %}
+{% endif %}
         port-range-min: 9091
         port-range-max: 9091
         protocol: tcp

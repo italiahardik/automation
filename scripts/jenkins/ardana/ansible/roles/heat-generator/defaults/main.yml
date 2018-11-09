@@ -73,4 +73,4 @@ virt_config:
   images: '{{ images|default([]) }}'
   disks: '{{ disks|default([]) }}'
 
-#ipv6: True
+ipv6: True

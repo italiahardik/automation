@@ -551,7 +551,6 @@ def generate_heat_model(input_model, virt_config):
 
     clm_cidr = IPNetwork(input_model['baremetal']['subnet'],
                          input_model['baremetal']['netmask'])
-    #clm_cidr = IPNetwork('fc00:0:0:101::/64')
     clm_network = None
     heat_networks = heat_template['networks'] = dict()
 

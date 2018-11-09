@@ -54,6 +54,8 @@ resources:
       ip_version: 4
 {%    endif %}
       enable_dhcp: False
+{%    endif %}
+
 
   # networks and subnets
 {% set global_ns = namespace(mgmt_network_name='', mgmt_ports=[]) %}
@@ -97,8 +99,6 @@ resources:
 {%   if network.gateway is defined %}
       gateway_ip: "{{ network.gateway }}"
 {%   endif   %}
-
-
 {%   if network.external %}
   router_ext_{{ name }}_interface:
     type: OS::Neutron::RouterInterface
