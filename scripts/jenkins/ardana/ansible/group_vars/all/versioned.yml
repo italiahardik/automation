@@ -23,7 +23,7 @@ when_cloud9M3: "{{ cloud_source | default(cloudsource) is match('cloud9M3') }}"
 
 versioned_features:
   manila:
-    enabled: "{{ when_staging }}"
+    enabled: True
   freezer:
     enabled: "{{ when_cloud8 }}"
   heat-api-cloudwatch:
