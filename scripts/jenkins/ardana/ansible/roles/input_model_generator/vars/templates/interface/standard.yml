@@ -39,10 +39,10 @@ interface_models:
     network_interfaces:
       - network_groups:
           - CONF
-      - bond:
-          mode: "active-backup"
-          num_interfaces: 2
-        network_groups:
+            #- bond:
+            #mode: "active-backup"
+            #nu#m_interfaces: 2
+      - network_groups:
           - MANAGEMENT
       - network_groups:
           - EXTERNAL-API
