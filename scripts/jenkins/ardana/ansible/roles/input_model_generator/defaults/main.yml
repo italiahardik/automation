@@ -26,7 +26,7 @@ availability_zones: 3
 rhel_distro_id: "rhel{{ rhel_os_version }}-x86_64"
 
 # Backend for designate: powerdns or bind
-designate_backend: bind
+designate_backend: powerdns
 
 # Regular expression matching disabled service components or component groups
 # (i.e. values in service_component_groups)
