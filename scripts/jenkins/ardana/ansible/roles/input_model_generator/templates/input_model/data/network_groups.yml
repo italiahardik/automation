@@ -69,7 +69,7 @@
         - swift-object
         - swift-rsync
 {%   elif 'EXTERNAL-API' in network_group.component_endpoints %}
-        - {{ designate_backend }}
+        - {{ designate_backend }}-ext
 {%   else %}
         []
 {%   endif %}
